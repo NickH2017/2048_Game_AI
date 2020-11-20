@@ -33,11 +33,11 @@ def add_new_key(board) :
         column = random.randint(0, 3)
     
     x = random.randint(2,4)
-
+    board[row][column]= x
+    
     if x == 3:
         board[row][column]= x-1
-    else:
-        board[row][column]= 2
+
 
 def get_current_board(board):
 
