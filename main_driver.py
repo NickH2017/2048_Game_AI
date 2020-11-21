@@ -11,8 +11,65 @@ def main():
 
     #if user pick ai as the player then 
     if(player == "AI"):
-        Expectimax.start()
-    
+        board=game.startingboard()
+        game.add_new_key(board)
+
+        game.print_board(board)
+
+        while(True):
+            
+            game.print_board(board)
+            x = input("Enter \'next\' for the Ai to commence an action: ")
+            
+            if x == "next":
+                
+                decision=Expectimax.ai_expectimax(board)
+
+                if decision == 0:
+                    board, flag = game.move_up(board)
+
+                    current_status = game.get_current_board(board)
+                    print(current_status)
+
+                    if(current_status== "game not over"):
+                        game.add_new_key(board)
+                    else:
+                        break
+                elif decision == 1:
+                    board, flag = game.move_down(board)
+
+                    current_status = game.get_current_board(board)
+                    print(current_status)
+
+                    if(current_status== "game not over"):
+                        game.add_new_key(board)
+                    else:
+                        break
+                elif decision == 2 :
+                    board, flag = game.move_right(board)
+
+                    current_status = game.get_current_board(board)
+                    print(current_status)
+
+                    if(current_status== "game not over"):
+                        game.add_new_key(board)
+                    else:
+                        break
+                elif decision == 3:
+                    board, flag = game.move_left(board)
+
+                    current_status = game.get_current_board(board)
+                    print(current_status)
+
+                    if(current_status== "game not over"):
+                        game.add_new_key(board)
+                    else:
+                        break
+            elif x == "quit":
+                break
+            
+            else: 
+                print("Invalid command")
 
     else :
         
