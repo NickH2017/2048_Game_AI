@@ -5,22 +5,6 @@ import game, math, sys, random
 
 #functions
 
-#Function will loop through a single row 
-def check_row(board, row, column):
-
-    
-    for j in range(column+1, 4):
-        if(board[row][j]!=0 and board[row][column]!=board[row][j]):
-            return False
-    return True
-
-def check_column(board, row, column):
-
-    for i in range(row+1, 4):
-        if (board[i][column] != 0 and board[row][column] != board[i][column]):
-            return False
-    return True
-
 def weight_evaluation(board):
     
     weight_val=6
@@ -34,35 +18,31 @@ def weight_evaluation(board):
     #loop through the board and determine it value by its position and the value of the key
     for i in range(3):
         for j in range(3):
-            if(board[i][j]!=0):        #and (check_row(board, i, j) or check_column(board, i, j)) ):
+            if(board[i][j]!=0):    
                 if(board[i][j+1]!=0 or board[i+1][j]!=0):
-                    if(board[i+1][j] == board[i][j] or board[i][j+1] ==board[i][j]): 
+                    if(board[i+1][j] <= board[i][j] or board[i][j+1] <= board[i][j]): 
                         var+=weight_grid[i][j]+(board[i][j]*2)
-                    elif(board[i][j+1]<board[i][j] or board[i+1][j] < board[i][j]):
-                        var+=weight_grid[i][j]+(board[i][j]*6)
-                                        #board[i+1][j] == board[i][j] or board[i][j+1] ==board[i][j])
-                else:
-                    var+=weight_grid[i][j]+ (board[i][j])
+
+                    else:
+                        var+=weight_grid[i][j]+ (board[i][j])
 
     for i in range(3):
         if(board[i][3]) != 0:
             if board[i+1][3] != 0:
-                if(board[i+1][3] < board[i][3]):
-                    var+=weight_grid[i][3]+(board[i][3]*6)
-                elif (board[i+1][3]==board[i][3]):
+                if(board[i+1][3] <= board[i][3]):
                     var+=weight_grid[i][3]+(board[i][3]*2)
-            else:
-                var+=weight_grid[i][3]+(board[i][3])
+
+                else:
+                    var+=weight_grid[i][3]+(board[i][3])
 
     for j in range(3):
         if(board[3][j]) != 0:
             if board[3][j+1] != 0:
-                if(board[3][j+1] < board[3][j+1]):
-                    var+=weight_grid[3][j]+(board[3][j]*6)
-                elif (board[3][j+1] == board[3][j]):
-                    var+=weight_grid[i][3]+(board[i][3]*2)
-            else : 
-                var+=weight_grid[3][j]+(board[3][j])
+                if(board[3][j+1] <= board[3][j]):
+                    var+=weight_grid[3][j]+(board[3][j]*2)
+
+                else : 
+                    var+=weight_grid[3][j]+(board[3][j])
 
     penalty= 0
     for i in range(4):
@@ -70,6 +50,7 @@ def weight_evaluation(board):
         for j in range(4):
             penalty+= abs(board[i][j] - value)+weight_grid[i][j]
     #print("Penalty: ", penalty)
+    
     return var -penalty
 
 def add_key():
