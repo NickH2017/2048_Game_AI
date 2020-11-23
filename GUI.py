@@ -192,9 +192,10 @@ class gameGUI:
                     self.won()
                 else:
                     self.lost()
-                        
+            else:
+                self.lost() 
             self.board = Expectimax.copy_board(tempboard)
 
 #test code          
-#new_game = gameGUI()
-#new_game.play("AI")
+new_game = gameGUI()
+new_game.play("AI")
