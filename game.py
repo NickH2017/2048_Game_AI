@@ -34,7 +34,6 @@ def add_new_key(board) :
     
     x = random.randint(2,4)
     board[row][column]= x
-    
     if x == 3:
         board[row][column]= x-1
 
@@ -46,7 +45,10 @@ def get_current_board(board):
         for x in range(4):
             if(board[i][x]== 2048):
                 return "Won"
-            elif(board[i][x]== 0):
+
+    for i in range(4):
+        for j in range(4):
+            if(board[i][j] == 0 ):
                 return "game not over"
     
     #loops check wether keys on the board has the same value
@@ -89,7 +91,7 @@ def compress(board):
 
 def merge(board):
 
-    change = True
+    change = False
 
     for i in range(4):
         for j in range(3):
