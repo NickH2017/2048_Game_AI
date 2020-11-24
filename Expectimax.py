@@ -3,8 +3,7 @@
 # 
 import game, math, sys, random
 
-#functions
-
+#function reponsible of evaluating 
 def weight_evaluation(board):
     
     #weight_val = 30
@@ -14,7 +13,7 @@ def weight_evaluation(board):
     #create a weighted board to determine value positioning on the board
     weight_grid=[[0, 0, 0, 0],[0, 0, 0, 5],[0, 0, 5, 30],[0, 5, 30, 60]]
 
-    #montonic heuristic 
+    # consistent heuristic and weighted heuristic
     #loop through the board and determine it value by its position and the value of the key
     for i in range(3, -1, -1):
         for j in range(3,-1,-1):
@@ -43,7 +42,8 @@ def weight_evaluation(board):
 
                 else : 
                     var+=weight_grid[3][j]+(board[3][j])
-
+    
+    #order Heuristic
     penalty = 0
     for i in range(3, -1,-1):
         value = board[i][0]
@@ -52,7 +52,7 @@ def weight_evaluation(board):
     #print("Penalty: ", penalty)
     
     return var -penalty
-
+#function return a random value between "2" or "4" that would be use as tiles
 def add_key():
     x = random.randint(2,4)
 
@@ -80,6 +80,7 @@ def empty_tiles(board):
                 count+=1
     return count
 
+#Function return board action desired by the input
 def decision(board, action):
 
     if action == 0:
@@ -95,9 +96,7 @@ def decision(board, action):
         board, temp = game.move_left(board)
         return board, temp
 
-# main Fucntions that are use to find the Expectimax
-
-#recursive search function using Expectimax
+#recursive search function using Expectimax algorithm
 def expectiminimax(board, node_type, depth):
 
     if game.get_current_board(board) == "Won":
@@ -152,6 +151,7 @@ def expectiminimax(board, node_type, depth):
     #print("Score at depth: ", depth, " = ", a)
     return a
 
+#function that initialize the expetiminimax function to start recursing and return the final decision from the result of the expetiminimax
 def ai_expectimax(board):
 
     decision_result=[]
