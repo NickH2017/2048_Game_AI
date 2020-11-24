@@ -30,7 +30,7 @@ In order to play this game you must have python 3.9 or 3.8 intall in your comput
 
 ## Usage
 
-main_driver.py will prompt the user what to do.
+main_driver.py will prompt the user what to do. The program will also be input validating to allow for proper run.
 
 If using the optional GUI.py, The bestway to test is to run GUI.py on it's own and comment out lines 224-225 to see the visual run of the AI.
 
