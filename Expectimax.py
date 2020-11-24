@@ -13,7 +13,7 @@ def weight_evaluation(board):
     #create a weighted board to determine value positioning on the board
     weight_grid=[[0, 0, 0, 0],[0, 0, 0, 5],[0, 0, 5, 30],[0, 5, 30, 60]]
 
-    # consistent heuristic and weighted heuristic
+    #weighted heuristic
     #loop through the board and determine it value by its position and the value of the key
     for i in range(3, -1, -1):
         for j in range(3,-1,-1):
