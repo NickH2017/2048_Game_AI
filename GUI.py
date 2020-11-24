@@ -2,6 +2,7 @@ import pygame
 import Expectimax
 import game
 from pygame.locals import *
+import time
 
 tileColors = {
     0: (200, 200, 200),
@@ -61,6 +62,9 @@ class gameGUI:
 
     def won(self):
 
+        self.draw_board()
+        pygame.display.flip()
+
         text = self.font.render('WIN', True, (0, 0, 0))
         textBox = text.get_rect()
         textBox.center = (600 // 2, 600 // 2) 
@@ -102,6 +106,7 @@ class gameGUI:
         while self.running:
 
             self.draw_board()
+            #time.sleep(1)
             pygame.display.flip()
             #cmd = -1
 
