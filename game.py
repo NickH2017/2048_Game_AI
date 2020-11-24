@@ -4,7 +4,7 @@
 import random
 
 # function initialize an empty 4*4 board grid and provided the list of command to input for game 
-# and randomily position a '2' key on the board
+# and randomily position a '2' or '4' key on the board
 def startingboard():
 
     board = []
@@ -22,7 +22,7 @@ def startingboard():
     add_new_key(board)
     return board
 
-#function add a random '2' key to the board that has a empty '0' key
+#function add a random '2' or '4' key to the board that has a empty '0' key
 def add_new_key(board) :
 
     row = random.randint(0, 3)
@@ -37,7 +37,7 @@ def add_new_key(board) :
     if x == 3:
         board[row][column]= x-1
 
-
+#function return the state of the board wether or not if the game has won or not
 def get_current_board(board):
 
     #loop through the board if a 2048 key exist
@@ -45,7 +45,7 @@ def get_current_board(board):
         for x in range(4):
             if(board[i][x]== 2048):
                 return "Won"
-
+    #loop through wether there is a '0' still left in the tile
     for i in range(4):
         for j in range(4):
             if(board[i][j] == 0 ):
@@ -64,7 +64,7 @@ def get_current_board(board):
     for i in range(3): 
         if(board[i][3]== board[i + 1][3]): 
             return "game not over"
-
+    #if all loop fail to find the condition of the game then it means that the current board is a lost
     return "game is lost"
 
 #
@@ -89,6 +89,8 @@ def compress(board):
                     pos +=1
     return new_board, change
 
+#function loop through the board and combined any tiles that have the same value then return board and a True indicated that it has been change. If no tiles
+# have been found to merge then it return a false value and the board 
 def merge(board):
 
     change = False
@@ -105,6 +107,7 @@ def merge(board):
 
     return board, change
 
+# function return a new board that has it tiles been reverse from the given board
 def reverse(board):
 
     new_board=[]
@@ -114,7 +117,7 @@ def reverse(board):
             new_board[i].append(board[i][3-j])
     
     return new_board
-
+#function perform a transpose process of a 2d array matrix, which is represented as the board
 def transpose(board):
     new_board=[]
 
@@ -125,7 +128,7 @@ def transpose(board):
 
     return new_board
     
-#function reponsible in intiating movement action for the game
+#function perfomed the action of moving the board left
 def move_left(grid_matrix):
 
     new_grid_matrix , change1 = compress(grid_matrix)
@@ -138,6 +141,7 @@ def move_left(grid_matrix):
 
     return new_grid_matrix, change
 
+#function perfomed the action of moving the board right
 def move_right(grid_matrix):
 
     new_grid_matrix= reverse(grid_matrix)
@@ -147,6 +151,7 @@ def move_right(grid_matrix):
     new_grid_matrix=reverse(new_grid_matrix)
     return new_grid_matrix, change
 
+#function perfomed the action of moving the board up 
 def move_up(grid_matrix): 
     
     new_grid_matrix = transpose(grid_matrix)
@@ -156,6 +161,7 @@ def move_up(grid_matrix):
     new_grid_matrix = transpose(new_grid_matrix)
     return new_grid_matrix, change
 
+#function perfomed the action of moving the board down 
 def move_down(grid_matrix):
 
     new_grid_matrix = transpose(grid_matrix)
