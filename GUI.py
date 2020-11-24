@@ -102,11 +102,30 @@ class gameGUI:
 
 
     def play(self, player):
+
+        if player == "AI":
+
+            print("Ready? Press space bar to continue.")
+            space = False
+            while True:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
+                        self.running = False
+                        pygame.quit()
+                        exit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == K_SPACE:
+                            space = True
+                            break
+                
+                if space:
+                    break
+                    
         
         while self.running:
 
             self.draw_board()
-            #time.sleep(1)
+            pygame.display.update()
             pygame.display.flip()
             #cmd = -1
 
@@ -201,6 +220,6 @@ class gameGUI:
                 self.lost() 
             self.board = Expectimax.copy_board(tempboard)
 
-#test code          
-new_game = gameGUI()
-new_game.play("AI")
+# TEST CODE FOR TA         
+#new_game = gameGUI()
+#new_game.play("AI")

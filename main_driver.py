@@ -1,16 +1,56 @@
 #
 # Main Driver that will ask if player wants to play or have AI play.
 #
-import Expectimax, game 
+import Expectimax, game
+import GUI
+import time
+
+if __name__ == "__main__":
+    
+    while True:
+        print("What interface would you like to use: \n1. Terminal \n2. GUI")
+        gameOutput = input("Type 1 or 2:")
+
+        try:
+            gameOutput = int(gameOutput)
+            if gameOutput == 1 or gameOutput == 2:
+
+                if gameOutput == 2:
+                    try:
+                        import pygame
+                        from pygame.locals import *
+                    except:
+                        print("Error: Pygame is not installed")
+                        
+                break
+        except:
+            print("Try Again. Choose 1 or 2")
+            
+
+    while True:
+        print("Who will be playing this game?: \n1. Human \n2. AI")
+        player = input("Type 1 or 2:")
 
 
-def main():
+        try:
+            player = int(player)
+            if player == 1 or player == 2:
+                break
+        except:
+            print("Try Again. Choose 1 or 2")
 
-    print("Who will be playing this game? \n Human or AI? ")
-    player=input()
+    # Starts Pygame GUI with HUMAN control
+    if(player == 1 and gameOutput == 2):
+        new_game = GUI.gameGUI()
+        new_game.play("HUMAN")
 
-    #if user pick ai as the player then the game would be play until the AI wins or lose.
-    if(player == "AI"):
+    # Starts Pygame GUI with AI control
+    elif(player == 2 and gameOutput == 2):
+        AIgame = GUI.gameGUI()
+        AIgame.play("AI")
+    
+    #If user picks AI as the player then the game would be play until the AI wins or lose.
+    elif(player == 2 and gameOutput == 1):
         
         #initiate the starting board and add a single random key tile that could be either
         #be a "4" or a "2" tile
@@ -23,9 +63,9 @@ def main():
         while(True):
             
             game.print_board(board)
-            x = input("Enter \'next\' for the Ai to commence an action: ")
+            x = input("Press 'Enter' key for the Ai to commence an action: ")
             
-            if x == "next":
+            if x == "":
                 
                 decision=Expectimax.ai_expectimax(board)
 
@@ -75,7 +115,7 @@ def main():
             else: 
                 print("Invalid command")
 
-    else :
+    elif player == 1 and gameOutput == 1:
         #begins to filled the board with the starting values and add a random key tile
         # that could either be "2" or "4"
         board = game.startingboard()
@@ -144,5 +184,6 @@ def main():
             #if player input a key that is not a valid move button for the game
             else :
                 print("Invalid key")
+    else:
+        print("Error")
 
-main()

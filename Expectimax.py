@@ -34,7 +34,7 @@ def weight_evaluation(board):
                 else:
                     var+=weight_grid[i][3]+(board[i][3])
 
-    for j in range(3,0,-1):
+    for j in range(3,-1,-1):
         if(board[3][j]) != 0:
             if board[3][j-1] != 0:
                 if(board[3][j-1] <= board[3][j]):
